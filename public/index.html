@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Santa Biblia Reina-Valera 1960 | Estudio y Lectura</title>
+  <meta name="description" content="Santa Biblia Reina-Valera 1960 (RVR1960) completa en español. Buscador instantáneo, concordancia, notas, destacados y lectura sin conexión." />
+  <meta name="theme-color" content="#8b1a1a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Biblia RVR1960" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=22" />
+  <script>
+    window.__deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.__deferredInstallPrompt = e;
+      window.dispatchEvent(new CustomEvent('pwa-install-ready'));
+    });
+  </script>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button id="btnToggleSidebar" class="topbar-sq-btn accent-icon" title="Mostrar/Ocultar libros (Menú)" aria-label="Libros">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="4" y1="12" x2="16" y2="12"></line>
+          <line x1="4" y1="18" x2="12" y2="18"></line>
+        </svg>
+      </button>
+
+      <button id="btnChapterPicker" class="chapter-picker-pill" title="Elegir libro o capítulo" aria-label="Elegir capítulo">
+        <span id="topbarChapterLabel">Génesis 1</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="topbar-center-nav">
+      <button id="btnPrevChapterTop" class="topbar-sq-btn nav-arrow-btn" title="Capítulo anterior (←)" aria-label="Capítulo anterior">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button id="btnNextChapterTop" class="topbar-sq-btn nav-arrow-btn" title="Siguiente capítulo (→)" aria-label="Siguiente capítulo">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="btnOpenSearchTop" class="topbar-sq-btn accent-icon" title="Buscador Bíblico (/)" aria-label="Buscar">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <line x1="20.5" y1="20.5" x2="16.4" y2="16.4"></line>
+        </svg>
+      </button>
+
+      <button id="btnSettings" class="topbar-sq-btn accent-icon" title="Ajustes de lectura" aria-label="Ajustes">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Reading Settings Drawer / Modal -->
+  <div id="settingsPopover" class="settings-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="settings-drawer">
+      <div class="settings-drawer-header">
+        <div class="settings-header-title">
+          <svg class="settings-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+          </svg>
+          <h4 id="settingsTitle">Ajustes de Lectura</h4>
+        </div>
+        <button id="btnCloseSettings" class="settings-close-btn" type="button" aria-label="Cerrar ajustes">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Vista previa en vivo fija al ajustar la lectura -->
+      <div id="settingsLivePreview" class="settings-live-preview" aria-label="Vista previa en vivo">
+        <div class="settings-preview-bar">
+          <span class="settings-preview-badge">
+            <span class="settings-preview-dot" aria-hidden="true"></span>
+            Vista previa en vivo · Mateo 4:4-5
+          </span>
+          <button type="button" id="btnToggleSettingsPreview" class="settings-preview-toggle" aria-expanded="true">
+            Ocultar
+          </button>
+        </div>
+        <div id="settingsPreviewStage" class="settings-preview-stage">
+          <div id="settingsPreviewText" class="verses-list settings-preview-text paragraph-mode">
+            <h3 class="passage-heading settings-preview-heading">Tentación de Jesús</h3>
+            <div class="verse-item">
+              <span class="verse-num">4</span><span class="verse-text">Él respondió y dijo: <span id="previewJesusText" class="words-of-jesus">Escrito está: <span id="previewOtQuote">No sólo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios.</span></span></span>
+            </div>
+            <div class="verse-item">
+              <span class="verse-num">5</span><span class="verse-text">Entonces el diablo le llevó a la santa ciudad, y le puso sobre el pináculo del templo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-drawer-body">
+        <!-- 1. TEMAS DE COLOR (10) -->
+        <div class="settings-section">
+          <button type="button" id="btnToggleThemePicker" class="settings-accordion-card" aria-expanded="false">
+            <span id="currentThemeDot" class="settings-theme-circle" style="background-color: #8b1a1a;"></span>
+            <span class="settings-accordion-text">
+              <span class="settings-micro-label">TEMAS DE COLOR (10)</span>
+              <span id="currentThemeName" class="settings-accordion-value">1. Luz Clásico</span>
+            </span>
+            <span class="settings-accordion-action">
+              <span>Cambiar</span>
+              <svg class="settings-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+
+          <div id="themePickerPanel" class="settings-accordion-panel hidden">
+            <div class="theme-selector-grid">
+              <button type="button" data-set-theme="light" class="theme-chip active">
+                <span class="theme-dot dot-light"></span>
+                <span>1. Luz Clásico</span>
+              </button>
+              <button type="button" data-set-theme="sepia" class="theme-chip">
+                <span class="theme-dot dot-sepia"></span>
+                <span>2. Sepia Cálido</span>
+              </button>
+              <button type="button" data-set-theme="parchment" class="theme-chip">
+                <span class="theme-dot dot-parchment"></span>
+                <span>3. Pergamino</span>
+              </button>
+              <button type="button" data-set-theme="cream" class="theme-chip">
+                <span class="theme-dot dot-cream"></span>
+                <span>4. Crema Suave</span>
+              </button>
+              <button type="button" data-set-theme="forest" class="theme-chip">
+                <span class="theme-dot dot-forest"></span>
+                <span>5. Oliva Sereno</span>
+              </button>
+              <button type="button" data-set-theme="sky" class="theme-chip">
+                <span class="theme-dot dot-sky"></span>
+                <span>6. Brisa Celeste</span>
+              </button>
+              <button type="button" data-set-theme="rose" class="theme-chip">
+                <span class="theme-dot dot-rose"></span>
+                <span>7. Aurora Cálida</span>
+              </button>
+              <button type="button" data-set-theme="midnight" class="theme-chip">
+                <span class="theme-dot dot-midnight"></span>
+                <span>8. Azul Medianoche</span>
+              </button>
+              <button type="button" data-set-theme="dark" class="theme-chip">
+                <span class="theme-dot dot-dark"></span>
+                <span>9. Noche Carbón</span>
+              </button>
+              <button type="button" data-set-theme="oled" class="theme-chip">
+                <span class="theme-dot dot-oled"></span>
+                <span>10. OLED Puro</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. TIPOGRAFÍA DE LECTURA (50) -->
+        <div class="settings-section">
+          <div class="settings-section-head">
+            <label for="fontFamilySelect" class="settings-section-label">TIPOGRAFÍA DE LECTURA (50)</label>
+            <span class="settings-section-meta">50 Opciones</span>
+          </div>
+          <div class="settings-select-wrap">
+            <select id="fontFamilySelect" class="settings-select" aria-label="Tipografía de lectura"></select>
+            <svg class="settings-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <p id="fontFamilyDesc" class="settings-font-hint">Tipografía optimizada para lectura prolongada y nitidez.</p>
+        </div>
+
+        <!-- 3. ESTILO DE LETRA -->
+        <div class="settings-section">
+          <button type="button" id="btnToggleFontStylePicker" class="settings-accordion-card" aria-expanded="false">
+            <span class="settings-aa-icon" aria-hidden="true">Aa</span>
+            <span class="settings-accordion-text">
+              <span class="settings-micro-label">ESTILO DE LETRA</span>
+              <span id="currentFontStyleName" class="settings-accordion-value">Normal</span>
+            </span>
+            <span class="settings-accordion-action">
+              <span>Cambiar</span>
+              <svg class="settings-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+
+          <div id="fontStylePickerPanel" class="settings-accordion-panel hidden">
+            <div class="font-style-grid">
+              <button type="button" data-set-fontstyle="light" class="style-chip">Ligera</button>
+              <button type="button" data-set-fontstyle="normal" class="style-chip active">Normal</button>
+              <button type="button" data-set-fontstyle="medium" class="style-chip">Seminegrita</button>
+              <button type="button" data-set-fontstyle="bold" class="style-chip">Negrita</button>
+              <button type="button" data-set-fontstyle="italic" class="style-chip">Cursiva</button>
+              <button type="button" data-set-fontstyle="bold-italic" class="style-chip">Negrita Cursiva</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. TAMAÑO DE TEXTO -->
+        <div class="settings-section">
+          <div class="settings-section-head">
+            <label for="fontSizeRange" class="settings-section-label">TAMAÑO DE TEXTO</label>
+            <span id="fontSizeLabel" class="settings-section-value">19 px</span>
+          </div>
+          <div class="settings-slider-row">
+            <button type="button" id="btnFontDec" class="slider-step-btn" aria-label="Reducir tamaño de texto">A-</button>
+            <input type="range" id="fontSizeRange" class="settings-range" min="14" max="32" step="1" value="19" />
+            <button type="button" id="btnFontInc" class="slider-step-btn" aria-label="Aumentar tamaño de texto">A+</button>
+          </div>
+        </div>
+
+        <!-- 5. INTERLINEADO -->
+        <div class="settings-section">
+          <div class="settings-section-head">
+            <label for="lineHeightRange" class="settings-section-label">INTERLINEADO</label>
+            <span id="lineHeightLabel" class="settings-section-value">1.7</span>
+          </div>
+          <div class="settings-slider-row">
+            <button type="button" id="btnLeadingDec" class="slider-step-btn" aria-label="Reducir interlineado">−</button>
+            <input type="range" id="lineHeightRange" class="settings-range" min="1.2" max="2.4" step="0.1" value="1.7" />
+            <button type="button" id="btnLeadingInc" class="slider-step-btn" aria-label="Aumentar interlineado">+</button>
+          </div>
+          <div class="settings-slider-ticks">
+            <button type="button" data-set-leading="1.2" class="slider-tick-btn">Compacto (1.2)</button>
+            <button type="button" data-set-leading="1.7" class="slider-tick-btn">Estándar (1.7)</button>
+            <button type="button" data-set-leading="2.4" class="slider-tick-btn">Espacioso (2.4)</button>
+          </div>
+        </div>
+
+        <!-- 6. DISPOSICIÓN DE VERSÍCULOS -->
+        <div class="settings-section">
+          <div class="settings-section-head">
+            <span class="settings-section-label">DISPOSICIÓN DE VERSÍCULOS</span>
+          </div>
+          <div class="layout-cards-grid">
+            <button type="button" data-set-layout="paragraph" class="layout-choice-card active">
+              <div class="layout-choice-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="18" x2="15" y2="18"></line>
+                </svg>
+                <span>Párrafo Continuo</span>
+              </div>
+              <p>Flujo continuo con superíndices, ideal para lectura fluida.</p>
+            </button>
+
+            <button type="button" data-set-layout="verses" class="layout-choice-card">
+              <div class="layout-choice-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="3" y1="5" x2="21" y2="5"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                  <line x1="3" y1="15" x2="21" y2="15"></line>
+                  <line x1="3" y1="20" x2="21" y2="20"></line>
+                </svg>
+                <span>Línea por Línea</span>
+              </div>
+              <p>Cada versículo en renglón separado para estudio y memorización.</p>
+            </button>
+          </div>
+        </div>
+
+        <hr class="settings-divider" />
+
+        <!-- 7. HERRAMIENTAS Y OPCIONES -->
+        <div class="settings-section">
+          <div class="settings-section-head">
+            <span class="settings-section-label">HERRAMIENTAS Y OPCIONES</span>
+          </div>
+
+          <div class="settings-options-stack">
+            <label class="settings-option-card">
+              <span class="settings-option-text">
+                <strong>Números de versículo</strong>
+                <span>Muestra u oculta la numeración en el texto</span>
+              </span>
+              <input type="checkbox" id="chkVerseNumbers" class="settings-checkbox" checked />
+            </label>
+
+            <label class="settings-option-card">
+              <span class="settings-option-text">
+                <strong>Títulos y subtítulos bíblicos</strong>
+                <span>Encabezados de pasajes (Reina Valera 1960)</span>
+              </span>
+              <input type="checkbox" id="chkBiblicalHeadings" class="settings-checkbox" checked />
+            </label>
+
+            <label class="settings-option-card">
+              <span class="settings-option-text">
+                <strong>Resaltar citas del Antiguo Testamento</strong>
+                <span>En negrita en el Nuevo Testamento</span>
+              </span>
+              <input type="checkbox" id="chkHighlightOT" class="settings-checkbox" />
+            </label>
+
+            <label class="settings-option-card">
+              <span class="settings-option-text">
+                <strong>Palabras de Jesús en rojo</strong>
+                <span>Edición con letra roja en Evangelios y Hechos</span>
+              </span>
+              <input type="checkbox" id="chkRedLetters" class="settings-checkbox" checked />
+            </label>
+
+            <div class="settings-option-card-wrap">
+              <label class="settings-option-card">
+                <span class="settings-option-text">
+                  <strong class="accent-title">Modo Diccionario RAE</strong>
+                  <span>Toca cualquier palabra del texto para ver su significado en la RAE</span>
+                </span>
+                <input type="checkbox" id="chkRaeMode" class="settings-checkbox" />
+              </label>
+              <div id="raeSubOptions" class="rae-suboptions hidden">
+                <label class="sublabel">Distinción en palabras ambiguas (ej. vino, traje, obra, canto):</label>
+                <div class="toggle-row">
+                  <button type="button" data-set-raedisambig="smart" class="ctrl-btn active" title="Detección directa según el versículo">Directo inteligente</button>
+                  <button type="button" data-set-raedisambig="confirm" class="ctrl-btn" title="Preguntar si es verbo o sustantivo antes de abrir">Preguntar categoría</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-option-card align-option-card">
+              <strong class="align-option-label">Alineación del texto</strong>
+              <div class="align-segmented">
+                <button type="button" data-set-align="left" class="align-seg-btn active">Izquierda</button>
+                <button type="button" data-set-align="justify" class="align-seg-btn">Justificado</button>
+              </div>
+            </div>
+
+            <button type="button" id="btnResetSettings" class="settings-reset-btn">
+              Restablecer Valores Predeterminados
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Workspace -->
+  <div class="app-layout">
+    <!-- Left Sidebar: Books of the Bible -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand-bar">
+        <a href="#" id="brandHome" class="brand">
+          <img src="/icon-192.png" alt="Biblia" class="brand-icon" />
+          <div class="brand-text">
+            <span class="brand-title">Santa Biblia</span>
+            <span class="brand-subtitle">Reina-Valera 1960</span>
+          </div>
+        </a>
+        <button id="btnCloseSidebar" class="close-btn" title="Cerrar menú" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="sidebar-quick-tools">
+        <button id="btnTopics" class="sidebar-tool-btn" title="Promesas y Temas de Ayuda">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+          </svg>
+          <span>Temas</span>
+        </button>
+        <button id="btnSaved" class="sidebar-tool-btn" title="Mis Destacados, Notas y Progreso">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Mi Estudio</span>
+          <span id="savedBadge" class="badge hidden">0</span>
+        </button>
+        <button id="btnToggleRaeQuick" class="sidebar-tool-btn rae-pill-btn" title="Modo Diccionario RAE">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Modo RAE</span>
+        </button>
+        <button id="btnInstallApp" class="sidebar-tool-btn" title="Instalar aplicación en celular o PC">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Instalar App</span>
+        </button>
+      </div>
+      <div class="sidebar-top">
+        <div class="testament-tabs">
+          <button class="tab-btn active" data-testament="ALL">Todos (66)</button>
+          <button class="tab-btn" data-testament="AT">A.T. (39)</button>
+          <button class="tab-btn" data-testament="NT">N.T. (27)</button>
+        </div>
+        <div class="book-filter-wrap">
+          <input type="text" id="bookFilterInput" placeholder="Filtrar libro (ej. Salmos, Juan)..." autocomplete="off" />
+        </div>
+      </div>
+      <div id="bookListContainer" class="book-list">
+        <!-- Populated dynamically -->
+      </div>
+      <div class="sidebar-footer">
+        <div class="reading-progress-mini">
+          <div class="progress-label-row">
+            <span>Progreso de lectura</span>
+            <strong id="progressPercentText">0%</strong>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="progressBarFill" class="progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Backdrop for mobile sidebar -->
+    <div id="sidebarBackdrop" class="backdrop hidden"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainScroll">
+      <!-- Loading Indicator -->
+      <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <p>Cargando Santa Biblia Reina-Valera 1960...</p>
+      </div>
+
+      <!-- Reader View -->
+      <article id="readerContainer" class="reader-container hidden">
+        <!-- Collapsible Chapter Number Grid (opens when clicking "Génesis 1 ⌄") -->
+        <div id="chapterGridPanel" class="chapter-grid-panel hidden">
+          <div class="chapter-grid-header">
+            <span>Capítulos de <strong id="gridBookName">Génesis</strong></span>
+            <div class="chapter-grid-header-right">
+              <div class="verse-jump-wrap">
+                <label for="verseJumpSelect">Vers.:</label>
+                <select id="verseJumpSelect" class="verse-select"></select>
+              </div>
+              <button id="btnMarkRead" class="read-check-btn compact" title="Marcar este capítulo como leído">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span id="markReadLabel">Leído</span>
+              </button>
+              <button id="btnCloseChapterGrid" class="text-btn">Cerrar</button>
+            </div>
+          </div>
+          <div id="chapterNumbersGrid" class="chapter-numbers-grid"></div>
+        </div>
+
+        <!-- Subtle Chapter Title -->
+        <header class="chapter-header minimal">
+          <span id="currentCategoryBadge" class="category-badge">Pentateuco · Antiguo Testamento</span>
+          <h1 id="currentChapterTitle" class="chapter-title" title="Toca para elegir capítulo">Génesis 1</h1>
+          <span id="chapterVerseCount" class="chapter-stats hidden">31 versículos</span>
+          <span id="chapterHint" class="chapter-hint hidden"></span>
+          <span id="chapterRaeHint" class="chapter-hint rae-active-hint hidden">📖 <strong>Modo RAE activo:</strong> Haz clic en cualquier palabra para buscarla en el Diccionario de la RAE</span>
+        </header>
+
+        <!-- Verses List -->
+        <div id="versesList" class="verses-list paragraph-mode"></div>
+
+        <!-- Bottom Chapter Navigation -->
+        <footer class="chapter-footer-nav">
+          <button id="btnPrevChapterBottom" class="footer-nav-btn">
+            <span class="nav-dir">← Anterior</span>
+            <strong id="prevChapterName">Apocalipsis 22</strong>
+          </button>
+
+          <button id="btnMarkReadBottom" class="read-check-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Leído</span>
+          </button>
+
+          <button id="btnNextChapterBottom" class="footer-nav-btn right">
+            <span class="nav-dir">Siguiente →</span>
+            <strong id="nextChapterName">Génesis 2</strong>
+          </button>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <!-- Fixed Bottom Navigation Bar -->
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <button id="btnBottomBooks" class="bottom-nav-item" type="button" aria-label="Libros">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+      <span>Libros</span>
+    </button>
+
+    <button id="btnBottomSearch" class="bottom-nav-item nav-accent" type="button" aria-label="Buscar">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7.5"></circle>
+        <line x1="20.5" y1="20.5" x2="16.4" y2="16.4"></line>
+      </svg>
+      <span>Buscar</span>
+    </button>
+
+    <button id="btnBottomPrev" class="bottom-nav-item" type="button" aria-label="Anterior">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span>Anterior</span>
+    </button>
+
+    <button id="btnBottomNext" class="bottom-nav-item" type="button" aria-label="Siguiente">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+      <span>Siguiente</span>
+    </button>
+
+    <button id="btnBottomSettings" class="bottom-nav-item nav-accent" type="button" aria-label="Ajustes">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span>Ajustes</span>
+    </button>
+  </nav>
+
+  <!-- Floating Verse Action Toolbar (when verses are selected) -->
+  <div id="verseActionToolbar" class="verse-toolbar hidden">
+    <div class="toolbar-top">
+      <span id="selectedVersesLabel" class="selected-ref">Génesis 1:1</span>
+      <div class="toolbar-top-actions">
+        <button id="btnSelectAllChapter" class="toolbar-mini-btn" type="button" title="Seleccionar todo el capítulo">Todo el cap.</button>
+        <button id="btnClearSelection" class="close-btn small" type="button" title="Deseleccionar">&times;</button>
+      </div>
+    </div>
+    <div class="toolbar-row">
+      <div class="highlight-swatches" title="Resaltar versículo">
+        <button class="swatch yellow" data-color="yellow" title="Amarillo" aria-label="Resaltar amarillo"></button>
+        <button class="swatch green" data-color="green" title="Verde" aria-label="Resaltar verde"></button>
+        <button class="swatch blue" data-color="blue" title="Azul" aria-label="Resaltar azul"></button>
+        <button class="swatch pink" data-color="pink" title="Rosa" aria-label="Resaltar rosa"></button>
+        <button class="swatch clear" data-color="none" title="Quitar resaltado" aria-label="Quitar resaltado">✕</button>
+      </div>
+      <div class="toolbar-divider"></div>
+      <div class="toolbar-actions-group">
+        <button id="btnCopyVerse" class="toolbar-btn primary-action" type="button" title="Copiar texto y cita al portapapeles">
+          <span>📋 Copiar</span>
+        </button>
+        <button id="btnWhatsAppVerse" class="toolbar-btn whatsapp-btn" type="button" title="Enviar por WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.126.556 4.122 1.529 5.854l-1.529 5.586 5.717-1.5c1.685.899 3.608 1.41 5.653 1.41 6.627 0 12-5.373 12-12 0-6.627-5.373-12-11.37-11.35z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </button>
+        <button id="btnShareVerse" class="toolbar-btn" type="button" title="Compartir en otras aplicaciones">
+          <span>↗ Compartir</span>
+        </button>
+        <button id="btnFavoriteVerse" class="toolbar-btn" type="button" title="Guardar en Favoritos">
+          <span>★ Favorito</span>
+        </button>
+        <button id="btnNoteVerse" class="toolbar-btn" type="button" title="Agregar o editar nota personal">
+          <span>✎ Nota</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Search Results / Concordance -->
+  <div id="searchModal" class="modal-overlay hidden">
+    <div class="modal-card search-modal-card">
+      <div class="search-modal-header">
+        <div class="search-modal-badge-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="20.5" y1="20.5" x2="16.4" y2="16.4"></line>
+          </svg>
+        </div>
+        <div class="search-modal-title-wrap">
+          <h3>Buscador Bíblico RVR1960</h3>
+          <p class="modal-subtitle">Busca por frase exacta o escribe libro, capítulo y versículo (ej. Juan 3:16)</p>
+        </div>
+        <button id="btnCloseSearchModal" class="close-btn search-close-btn" aria-label="Cerrar">&times;</button>
+      </div>
+
+      <div class="search-modal-controls">
+        <div class="modal-search-input-wrap">
+          <svg class="modal-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="20.5" y1="20.5" x2="16.4" y2="16.4"></line>
+          </svg>
+          <input
+            type="search"
+            id="modalSearchInput"
+            placeholder="Ej. Juan 3:16, de tal manera amó..."
+            autocomplete="off"
+            enterkeyhint="search"
+          />
+        </div>
+
+        <div class="search-scope-pills search-scope-grid">
+          <button class="scope-pill active" data-scope="ALL">Toda la<br />Biblia</button>
+          <button class="scope-pill" data-scope="AT">Antiguo<br />T.</button>
+          <button class="scope-pill" data-scope="NT">Nuevo<br />T.</button>
+          <button class="scope-pill" data-scope="BOOK" id="scopeCurrentBookBtn">Solo<br />Génesis</button>
+        </div>
+
+        <label class="exact-phrase-label">
+          <input type="checkbox" id="chkExactPhrase" checked />
+          <span class="exact-checkbox-box" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+          <span>Frase exacta</span>
+        </label>
+      </div>
+
+      <div id="searchResultsList" class="modal-body search-results-list"></div>
+
+      <div class="search-modal-footer">
+        <span id="searchSummaryText">Escribe una frase exacta o una cita bíblica (ej. Juan 3:16).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Promises & Helpful Topics -->
+  <div id="topicsModal" class="modal-overlay hidden">
+    <div class="modal-card large">
+      <div class="modal-header">
+        <div>
+          <h3>Temas Bíblicos y Promesas de Ayuda</h3>
+          <p class="modal-subtitle">18 guías temáticas con pasajes clave de la Reina-Valera 1960 para cada necesidad</p>
+        </div>
+        <button id="btnCloseTopicsModal" class="close-btn">&times;</button>
+      </div>
+      <div class="search-modal-controls">
+        <input type="search" id="topicFilterInput" placeholder="Filtrar tema (ej. ansiedad, sanidad, familia, finanzas, oración, fe)..." autocomplete="off" />
+        <div class="search-scope-pills" id="topicCategoryPills">
+          <button class="scope-pill active" data-topic-cat="ALL">Todos los temas (18)</button>
+          <button class="scope-pill" data-topic-cat="animo">Ánimo y Paz</button>
+          <button class="scope-pill" data-topic-cat="fe">Fe y Oración</button>
+          <button class="scope-pill" data-topic-cat="vida">Familia y Vida Diaria</button>
+          <button class="scope-pill" data-topic-cat="doctrina">Doctrina y Salvación</button>
+        </div>
+      </div>
+      <div id="topicsModalBody" class="modal-body topics-container"></div>
+    </div>
+  </div>
+
+  <!-- Modal: My Study (Favorites, Highlights, Notes, Reading Progress, Backup) -->
+  <div id="savedModal" class="modal-overlay hidden">
+    <div class="modal-card large">
+      <div class="modal-header">
+        <div>
+          <h3>Mi Estudio Personal</h3>
+          <p class="modal-subtitle">Tus versículos favoritos, destacados, notas personales e historial</p>
+        </div>
+        <button id="btnCloseSavedModal" class="close-btn">&times;</button>
+      </div>
+      <div class="saved-tabs">
+        <button class="saved-tab active" data-saved-tab="favorites">★ Favoritos</button>
+        <button class="saved-tab" data-saved-tab="notes">✎ Notas</button>
+        <button class="saved-tab" data-saved-tab="highlights">🖍 Destacados</button>
+        <button class="saved-tab" data-saved-tab="history">🕒 Historial y Progreso</button>
+      </div>
+      <div id="savedModalBody" class="modal-body saved-list"></div>
+      <div class="modal-footer">
+        <button id="btnExportData" class="secondary-btn">⬇ Exportar mis notas (JSON)</button>
+        <label class="secondary-btn file-label">
+          ⬆ Importar respaldo
+          <input type="file" id="inputImportData" accept=".json" hidden />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Note for a Verse -->
+  <div id="noteModal" class="modal-overlay hidden">
+    <div class="modal-card small">
+      <div class="modal-header">
+        <h3 id="noteModalTitle">Nota en Génesis 1:1</h3>
+        <button id="btnCloseNoteModal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="noteModalVersePreview" class="note-verse-preview"></p>
+        <textarea id="noteTextarea" rows="5" placeholder="Escribe tu reflexión, estudio o apunte sobre este versículo..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="btnDeleteNote" class="secondary-btn danger hidden">Eliminar nota</button>
+        <button id="btnSaveNote" class="primary-btn">Guardar nota</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Install App on Mobile & PC -->
+  <div id="installModal" class="modal-overlay hidden">
+    <div class="modal-card install-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>Instalar Santa Biblia en Celular y PC</h3>
+          <p class="modal-subtitle">Acceso directo con ícono propio en tu pantalla de inicio o Escritorio y lectura 100% sin conexión</p>
+        </div>
+        <button id="btnCloseInstallModal" class="close-btn">&times;</button>
+      </div>
+
+      <!-- Platform Filter Tabs -->
+      <div class="install-platform-tabs" id="installPlatformTabs">
+        <button type="button" class="install-tab-btn active" data-install-tab="all">📱💻 Celular y PC</button>
+        <button type="button" class="install-tab-btn" data-install-tab="mobile">📱 En Celular / Tablet</button>
+        <button type="button" class="install-tab-btn" data-install-tab="pc">💻 En Computadora (PC)</button>
+      </div>
+
+      <div class="modal-body install-modal-body">
+        <!-- Detected Device Status Banner -->
+        <div id="installStatusBanner" class="install-status-banner">
+          <img src="/icon-192.png" alt="Ícono Santa Biblia" class="install-banner-icon" />
+          <div class="install-banner-text">
+            <strong id="installDetectedDeviceLabel">Santa Biblia Reina-Valera 1960 (App Oficial)</strong>
+            <span id="installDetectedStatusDesc">Elige abajo instalar en tu Celular (Android / iPhone) o en tu PC (Windows / Mac).</span>
+          </div>
+        </div>
+
+        <!-- Dual Platform Cards Container -->
+        <div id="installCardsGrid" class="install-cards-grid">
+          <!-- CARD 1: CELULAR / TABLET -->
+          <section id="installCardMobile" class="install-platform-card mobile-card">
+            <div class="platform-card-badge">📱 CELULAR Y TABLET · ANDROID / iPHONE / iPAD</div>
+            <div class="platform-card-head">
+              <img src="/icon-512.png" alt="App Celular" class="platform-app-icon" />
+              <div>
+                <h4>Instalar en el Celular</h4>
+                <p>Agrega el ícono oficial a la pantalla de tu teléfono. Abre a pantalla completa y funciona 100% sin internet ni datos móviles.</p>
+              </div>
+            </div>
+
+            <div class="platform-primary-actions">
+              <button id="btnInstallMobile" type="button" class="primary-btn install-now-btn mobile-install-btn">
+                📲 Instalar en mi Celular Ahora
+              </button>
+              <button id="btnOpenInChromeAndroid" type="button" class="secondary-btn chrome-intent-btn hidden">
+                🌐 Abrir en Google Chrome para Instalar
+              </button>
+            </div>
+
+            <!-- Interactive Mobile Assistant (auto-expands on iOS or when manual browser menu step is needed) -->
+            <div id="mobileInstallAssistant" class="mobile-install-assistant hidden"></div>
+
+            <div class="platform-secondary-actions">
+              <button id="btnSendMobileWhatsApp" type="button" class="secondary-btn wa-send-btn" title="Enviar enlace de instalación a mi WhatsApp">
+                💬 Enviar instalador a mi WhatsApp
+              </button>
+              <button id="btnCopyMobileLink" type="button" class="secondary-btn" title="Copiar enlace directo para abrir en el celular">
+                📋 Copiar enlace para celular
+              </button>
+            </div>
+
+            <div class="install-step-box compact">
+              <h5>Guía rápida para Celular:</h5>
+              <ol>
+                <li><strong>En Android (Chrome, Edge, Samsung, Brave):</strong> Toca el botón <strong>"📲 Instalar en mi Celular Ahora"</strong> arriba. Si no aparece el cartel automático, toca el menú de 3 puntos <strong>⋮</strong> (arriba a la derecha) y elige <strong>"Instalar aplicación"</strong> o <strong>"Agregar a la pantalla principal"</strong>.</li>
+                <li><strong>En iPhone / iPad (Safari o Chrome):</strong> Toca el botón <strong>Compartir [↑]</strong> en la barra del navegador y selecciona <strong>"➕ Agregar a inicio"</strong>.</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- CARD 2: COMPUTADORA / PC -->
+          <section id="installCardPC" class="install-platform-card pc-card">
+            <div class="platform-card-badge">💻 COMPUTADORA · WINDOWS / MAC / LINUX</div>
+            <div class="platform-card-head">
+              <img src="/icon-512.png" alt="App PC" class="platform-app-icon" />
+              <div>
+                <h4>Instalar en la PC</h4>
+                <p>Crea un <strong>ícono exclusivo en tu Escritorio y Barra de Tareas</strong>. Abre en ventana propia como un programa de Windows y funciona sin conexión.</p>
+              </div>
+            </div>
+
+            <div class="platform-primary-actions">
+              <button id="btnTriggerNativeInstall" type="button" class="primary-btn install-now-btn">
+                🖥 Instalar en mi PC Ahora
+              </button>
+            </div>
+
+            <div class="platform-secondary-actions">
+              <button id="btnDownloadDesktopShortcut" type="button" class="secondary-btn">
+                ⚡ Descargar Instalador PC (.bat)
+              </button>
+              <a href="/favicon.ico" download="Santa-Biblia-RVR1960.ico" class="secondary-btn">
+                ⬇ Descargar Ícono (.ico)
+              </a>
+            </div>
+
+            <div class="install-step-box compact">
+              <h5>Guía rápida para PC:</h5>
+              <ol>
+                <li>Haz clic en <strong>"🖥 Instalar en mi PC Ahora"</strong> (o en el ícono <strong>⊕</strong> a la derecha de la barra de direcciones en Chrome, Edge o Brave) y confirma en <strong>"Instalar"</strong>.</li>
+                <li><strong>Alternativa directa para Windows:</strong> Descarga y abre <strong>"⚡ Descargar Instalador PC (.bat)"</strong> para crear automáticamente el acceso directo con ícono en tu Escritorio y Menú Inicio.</li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: RAE Category Disambiguation (Verbo vs Sustantivo) -->
+  <div id="raeDisambigModal" class="modal-overlay hidden">
+    <div class="modal-card small rae-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="raeModalWordTitle">Palabra: «vino»</h3>
+          <p class="modal-subtitle">Esta palabra tiene función como <strong>Verbo</strong> y como <strong>Sustantivo</strong>. Elige cómo deseas consultarla en la RAE:</p>
+        </div>
+        <button id="btnCloseRaeModal" type="button" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body rae-modal-body">
+        <div class="rae-choices-grid">
+          <button id="btnRaeChooseVerb" type="button" class="rae-choice-card">
+            <div class="rae-choice-header">
+              <span class="badge-category badge-verb">⚡ Verbo</span>
+              <span class="rae-external-icon">↗</span>
+            </div>
+            <div class="rae-choice-lemma">
+              Infinitivo: <strong id="raeVerbLemmaText">venir</strong>
+            </div>
+            <p id="raeVerbDescText" class="rae-choice-desc">Consulta el verbo en la RAE con su tabla de conjugaciones completa.</p>
+          </button>
+
+          <button id="btnRaeChooseNoun" type="button" class="rae-choice-card">
+            <div class="rae-choice-header">
+              <span class="badge-category badge-noun">📘 Sustantivo</span>
+              <span class="rae-external-icon">↗</span>
+            </div>
+            <div class="rae-choice-lemma">
+              Forma base: <strong id="raeNounLemmaText">vino</strong>
+            </div>
+            <p id="raeNounDescText" class="rae-choice-desc">Consulta el sustantivo en la RAE con todas sus acepciones.</p>
+          </button>
+        </div>
+        <div class="rae-modal-context">
+          <span>Contexto en el versículo:</span>
+          <em id="raeVerseContextSnippet">«...y vino a ellos...»</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/app.js?v=20"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+desktop/node_modules/
+mobile/node_modules/
+
+# Build outputs & installers (published via GitHub Releases)
+dist/
+desktop/dist-win/
+mobile/android/app/build/
+mobile/android/build/
+mobile/android/.gradle/
+mobile/android/local.properties
+
+# Sensitive signing keys
+*.keystore
+*.jks
+
+# Firebase & OS cache
+.firebase/
+.DS_Store
+Thumbs.db

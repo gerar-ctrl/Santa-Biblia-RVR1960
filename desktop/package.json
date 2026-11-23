@@ -1,0 +1,67 @@
+{
+  "name": "santa-biblia-rvr1960",
+  "version": "1.0.0",
+  "description": "Santa Biblia Reina-Valera 1960 - Aplicación de Escritorio",
+  "author": "Santa Biblia RVR1960",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "^35.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "app.web.generadordesermones.biblia",
+    "productName": "Santa Biblia RVR1960",
+    "directories": {
+      "output": "dist-win"
+    },
+    "files": [
+      "main.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../public",
+        "to": "public",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "../Biblia-RVR1960.ico",
+        "to": "Biblia-RVR1960.ico"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "../Biblia-RVR1960.ico",
+      "artifactName": "Santa-Biblia-RVR1960-Setup.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Santa Biblia RVR1960",
+      "installerLanguages": [
+        "es_ES"
+      ],
+      "language": "3082",
+      "installerIcon": "../Biblia-RVR1960.ico",
+      "uninstallerIcon": "../Biblia-RVR1960.ico",
+      "uninstallDisplayName": "Santa Biblia Reina-Valera 1960"
+    }
+  }
+}

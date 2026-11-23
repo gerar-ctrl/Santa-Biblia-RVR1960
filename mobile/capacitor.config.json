@@ -1,0 +1,12 @@
+{
+  "appId": "app.web.generadordesermones.biblia",
+  "appName": "Biblia RVR1960",
+  "webDir": "../public",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#8b1a1a"
+  }
+}

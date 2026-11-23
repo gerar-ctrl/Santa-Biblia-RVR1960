@@ -1,0 +1,72 @@
+{
+  "id": "/",
+  "name": "Santa Biblia Reina-Valera 1960",
+  "short_name": "Biblia RVR1960",
+  "description": "Santa Biblia Reina-Valera 1960 completa con concordancia, buscador instantáneo, notas, resaltados y lectura sin conexión.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#8b1a1a",
+  "lang": "es",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Salmos",
+      "short_name": "Salmos",
+      "description": "Ir al libro de los Salmos",
+      "url": "/#sal-1",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Evangelio de Juan",
+      "short_name": "Juan",
+      "description": "Ir al Evangelio según San Juan",
+      "url": "/#jn-1",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Proverbios",
+      "short_name": "Proverbios",
+      "description": "Ir al libro de los Proverbios",
+      "url": "/#pr-1",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
